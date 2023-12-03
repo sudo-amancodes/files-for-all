@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Files For All</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="styles/styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="images/logo2.png" />
     <script src="https://kit.fontawesome.com/cbec5c0848.js" crossorigin="anonymous"></script>
+    <script>
+        $(function() {
+          $( ".draggable" ).draggable();
+        } );
+    </script>
 </head>
 <body>
     <div class="hero-section">
@@ -27,7 +34,7 @@
             </ul>
         </nav>
         <div class="content">
-            <h1>Click One!</h1>
+            <h1>Home</h1>
             <a href="urlpage.html">Url Downloader</a>
             <a href="fileconverter.html">File Converter</a>
         </div>
@@ -37,13 +44,15 @@
         <p>We offer many crucial things to our users.</p> 
         <div class="shrink">
         <div class="how-row">
-            <div class="how-col">
+            
+            <div class="how-col draggable">
                 <h3>Url Downloader</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus veniam ratione quo in alias, eius a consequuntur neque magnam, architecto nisi placeat fuga optio ducimus harum soluta, laborum rem odit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos enim repudiandae quam sit, maiores illum sequi neque tenetur deleniti aperiam totam dolorem, harum optio at quis corrupti architecto, excepturi alias.</p>
+                <p>Easily download videos from the internet using just their URLs. Paste the link, choose your preferred format and quality, and get your video in no time. Access your favorite content offline hassle-free. Try our URL downloader today for a seamless video downloading experience! You will be amazed by the speed!</p>
             </div>
-            <div class="how-col">
+            <div class="how-col draggable">
                 <h3>File Converter</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus veniam ratione quo in alias, eius a consequuntur neque magnam, architecto nisi placeat fuga optio ducimus harum soluta, laborum rem odit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos enim repudiandae quam sit, maiores illum sequi neque tenetur deleniti aperiam totam dolorem, harum optio at quis corrupti architecto, excepturi alias.</p>
+                <p>Easily change file types by selecting your preferred options. Upload your file, choose the format you need, and convert it quickly and effortlessly. Our user-friendly interface ensures a smooth conversion process. Transform your files hassle-free and access them in the format you require. Try our file converter today for seamless file type conversions!
+                </p>
             </div>
         </div> 
     </div>
@@ -55,15 +64,15 @@
                 <h1>
                     What our users say!
                 </h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eaque nam harum mollitia ratione distinctio deleniti delectus blanditiis vero architecto placeat quo dolorem, beatae quod similique magnam et, aspernatur quidem.</p>
+                <p>Hopefully you can have the same experience.</p>
             </div>
             <div class="row">
                 <div class="testimonial-col">
-                    <img src="images/logo1.png">
+                    <img src="images/user1.jpg">
                     <div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus veniam ratione quo in alias, eius a consequuntur neque magnam, architecto nisi placeat fuga optio ducimus harum soluta, laborum rem odit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos enim repudiandae quam sit, maiores illum sequi neque tenetur deleniti aperiam totam dolorem, harum optio at quis corrupti architecto, excepturi alias.</p>
+                        <p>"I absolutely love this file converter tool! It's incredibly easy to use, and I can quickly change file types without any hassle. The interface is user-friendly, making the whole process seamless. Highly recommended!"</p>
                         <h3>
-                            Christine Berley
+                            - Christine Berley
                         </h3>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -73,11 +82,11 @@
                     </div>
                 </div>
                 <div class="testimonial-col">
-                    <img src="images/logo1.png">
+                    <img src="images/user2.jpg">
                     <div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus veniam ratione quo in alias, eius a consequuntur neque magnam, architecto nisi placeat fuga optio ducimus harum soluta, laborum rem odit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos enim repudiandae quam sit, maiores illum sequi neque tenetur deleniti aperiam totam dolorem, harum optio at quis corrupti architecto, excepturi alias.</p>
+                        <p>"This converter is a game-changer! I've been able to convert my files effortlessly. It's so convenient to select the format I need and get the job done in no time. Definitely a must-have tool for anyone dealing with different file types!"</p>
                         <h3>
-                            David Byer
+                            - David Byer
                         </h3>
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>

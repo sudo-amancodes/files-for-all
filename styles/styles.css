@@ -72,13 +72,14 @@ nav ul li a:hover{
 }
 .search-bar{
     width: 100%;
-    max-width: 525px;
+    max-width:  700px;
     background: rgba(255, 255, 255, .2);
-    display: inline-block;    
+    display: flex;    
     align-items: center;
+    margin: auto;
     border-radius: 60px;
     padding: 10px 20px;
-    
+    backdrop-filter: blur(4px) saturate();
 }
 .whypage{
     margin:auto;
@@ -102,7 +103,7 @@ text-align:left;
     background:transparent;
     flex: 1;
     outline: none;
-    padding-right:200px;
+    padding-right:24px 20px;
     color: #cac7ff;
     font-size: 20px;
     border: 0;
@@ -128,7 +129,7 @@ text-align:left;
     z-index: -1;
 }
 .howpage{
-    min-height: 100vh;
+    min-height: 75vh;
     width: 80%;
     background-position: center;
     background-size: cover;
@@ -151,7 +152,7 @@ text-align:left;
     
 }
 .how-col{
-    flex-basis: 40%;
+    flex-basis: 45%;
     background: #fff3f3;
     border-radius: 10px;
     margin-bottom: 5%;
@@ -172,9 +173,9 @@ text-align:left;
 
 }
 .darker-bg{
-    height: 100vh;
+    min-height: 75vh;
     width: 100%;
-    background-image: linear-gradient(rgba(4,9,30,.7), rgba(4,9,30,.7)), url(/images/users.jpg);
+    background-image: linear-gradient(rgba(4,9,30,.9), rgba(4,9,30,.8)), url(/images/users.jpg);
     background-position: center;
     background-size: cover;
     position: relative;
@@ -227,13 +228,14 @@ text-align:left;
 .aboutmepage{
     min-height: 75vh;
     width: 100%;
-    background-image: linear-gradient(rgba(4,9,30,.7), rgba(4,9,30,.7)), url(images/pexels-thisisengineering-3861959.jpg);
+    background-image: linear-gradient(rgba(4,9,30,.9), rgba(4,9,30,.8)), url(/images/users.jpg);
     background-position: center;
     background-size: cover;
     position: relative;
     margin:auto;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 25px;
+    padding-bottom: 25px;
 
 }
 .aboutmepage img{
