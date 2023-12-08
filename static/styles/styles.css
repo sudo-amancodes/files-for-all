@@ -255,6 +255,7 @@ justify-content: center;
     margin:auto;
     text-align: center;
     width: 80%;
+    padding-bottom: 10%;
 }
 @media (min-aspect-ratio: 16/9){
     .back-video{
@@ -269,3 +270,18 @@ justify-content: center;
         height: 100%;
     }
 }
+.spaced{
+    margin-top: 10px;
+}
+.videoDivClass {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+ }
+ 
+ .videoDivClass video {
+    width: 100%;
+    height: auto;
+ }
+
+ 

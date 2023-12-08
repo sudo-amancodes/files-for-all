@@ -26,33 +26,33 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css')}}" />
     <script
       src="https://kit.fontawesome.com/cbec5c0848.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="shortcut icon" type="image/x-icon" href="images/logo2.png" />
-    <link rel="stylesheet" href="styles/timelinestyles.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/logo2.png')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/timelinestyles.css')}}" />
     <!-- JQuery Plugin -->
-    <script src="scripts/oridomi.min.js"></script>
+    <script src="{{ url_for('static', filename='scripts/oridomi.min.js')}}"></script>
   </head>
   <body>
     <div class="hero-section">
       <video autoplay loop muted plays-inline class="back-video">
-        <source src="images/video-2.mp4" type="video/mp4" />
+        <source src="{{ url_for('static', filename='images/video-2.mp4')}}" type="video/mp4" />
       </video>
       <nav>
-        <a href="index.html"><img src="images/logo2.png" class="logo" /></a>
+        <a href="/"><img src="{{ url_for('static', filename='images/logo2.png')}}" class="logo" /></a>
         <ul>
-          <li><a href="urlpage.html">Url Downloader</a></li>
-          <li><a href="fileconverter.html">File Converter</a></li>
-          <li><a href="aboutus.html">About Us</a></li>
-          <li><a href="donate.html">Donate</a></li>
+          <li><a href="/urlpage">Url Downloader</a></li>
+          <li><a href="/fileconverter">File Converter</a></li>
+          <li><a href="/aboutus">About Us</a></li>
+          <li><a href="/donate">Donate</a></li>
         </ul>
       </nav>
       <div class="content">
         <h1>About Us</h1>
-        <a href="urlpage.html">Current Portfolio</a>
+        <a href="https://github.com/AmanW-GitHub">Current Portfolio</a>
       </div>
     </div>
     <!-- https://niemvuilaptrinh.medium.com/27-html-timeline-for-web-design-979b8e5d1c05
@@ -121,7 +121,7 @@
         <div class="text-lighten">
           <h1>Who am I?</h1>
           <p>I am the founder and coordinator at Files For All!</p>
-          <img class="oriimage" src="images/IMG_6866.jpeg" />
+          <img class="oriimage" src="{{ url_for('static', filename='images/IMG_6866.jpeg')}}" />
         </div>
       </div>
     </section>
@@ -144,18 +144,15 @@
     <script>
       $(document).ready(function () {
         var $folded = $(".aboutmepage").oriDomi({ maxAngle: 40, vPanels: 3 });
-
-        // Trigger accordion method on $folded
-        $folded.oriDomi("accordion", 50);
-
+        
         // Function to handle scroll event
         function handleScroll() {
-          if ($(this).scrollTop() > 150) {
+          if ($(this).scrollTop() > 250) {
             // Apply accordion effect when scrolled more than 100px
             $folded.oriDomi("accordion", 0);
           } else {
             // Reset to default state if scrolled back to the top
-            $folded.oriDomi("accordion", 100);
+            $folded.oriDomi("accordion", 50);
           }
         }
 

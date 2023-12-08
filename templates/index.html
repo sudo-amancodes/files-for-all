@@ -23,8 +23,10 @@
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <link rel="stylesheet" href="../styles/styles.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../images/logo2.png" />
+    <!-- <link rel="stylesheet" href="../styles/styles.css" /> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css')}}" />
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="../images/logo2.png" /> -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/logo2.png')}}" />
     <script
       src="https://kit.fontawesome.com/cbec5c0848.js"
       crossorigin="anonymous"
@@ -38,21 +40,21 @@
   <body>
     <div class="hero-section">
       <video autoplay loop muted plays-inline class="back-video">
-        <source src="../images/video-2.mp4" type="video/mp4" />
+        <source src="{{ url_for('static', filename='images/video-2.mp4')}}" type="video/mp4" />
       </video>
       <nav>
-        <a href="index.html"><img src="../images/logo2.png" class="logo" /></a>
+        <a href="/"><img src="{{ url_for('static', filename='images/logo2.png')}}" class="logo" /></a>
         <ul>
-          <li><a href="urlpage.html">Url Downloader</a></li>
-          <li><a href="fileconverter.html">File Converter</a></li>
-          <li><a href="aboutus.html">About Us</a></li>
-          <li><a href="donate.html">Donate</a></li>
+          <li><a href="/urlpage">Url Downloader</a></li>
+          <li><a href="/fileconverter">File Converter</a></li>
+          <li><a href="/aboutus">About Us</a></li>
+          <li><a href="/donate">Donate</a></li>
         </ul>
       </nav>
       <div class="content">
         <h1>Home</h1>
-        <a href="urlpage.html">Url Downloader</a>
-        <a href="fileconverter.html">File Converter</a>
+        <a href="/urlpage">Url Downloader</a>
+        <a href="/fileconverter">File Converter</a>
       </div>
     </div>
     <section class="howpage" id="how-section">
@@ -92,7 +94,7 @@
         </div>
         <div class="row">
           <div class="testimonial-col">
-            <img src="../images/user1.jpg" />
+            <img src="{{ url_for('static', filename='images/user1.jpg')}}" />
             <div>
               <p>
                 "I absolutely love this file converter tool! It's incredibly
@@ -109,7 +111,7 @@
             </div>
           </div>
           <div class="testimonial-col">
-            <img src="../images/user2.jpg" />
+            <img src="{{ url_for('static', filename='images/user2.jpg')}}" />
             <div>
               <p>
                 "This converter is a game-changer! I've been able to convert my
