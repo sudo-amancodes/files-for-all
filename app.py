@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, jsonify
 import yt_dlp
 import subprocess
 from io import BytesIO, StringIO
-from PIL import Image
 from werkzeug.utils import secure_filename
 import ffmpeg
 import os
