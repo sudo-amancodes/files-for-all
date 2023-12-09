@@ -49,7 +49,6 @@
                 <option value="AVI">AVI</option>
                 <option value="MKV">MKV</option>
                 <option value="WebM">WebM</option>
-                <option value="GIF">GIF</option>
               </select>
               
               <select class="image-select" id="inputGroupSelect02" name="format2">
@@ -76,18 +75,26 @@
             <h1>
               How Do You Use The File Converter?
                     </h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo cum voluptatibus, odit sunt, veniam ea doloremque rem sed maiores iusto rerum non iure beatae consequuntur neque facere assumenda praesentium mollitia! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo cum voluptatibus, odit sunt, veniam ea doloremque rem sed maiores iusto rerum non iure beatae consequuntur neque facere assumenda praesentium mollitia!</p>
+                    <br>
+                    <p>Step 1) Input your file into file bar.</p>
+                    <p>Step 2) Click next and choose your needed file type.</p>
+                    <p>Step 3) Submit the file and wait a few seconds for file (Could take longer based on file).</p>
+                    <p>Step 4) Click the button for the converted file!</p>
+                    <br>
+                    <br>
+                    <p>(Only Accepting Video Files)</p>
+                    <p><em>See images for help!</em></p>
         </div>
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active img-one">
-              <img class="d-block w-100 " src="{{ url_for('static', filename='images/users.jpg')}}" alt="First slide">
+              <img class="d-block w-100 " src="{{ url_for('static', filename='images/convert1.png')}}" alt="First slide">
             </div>
             <div class="carousel-item img-two">
-              <img class="d-block w-100" src="{{ url_for('static', filename='images/users.jpg')}}" alt="Second slide">
+              <img class="d-block w-100" src="{{ url_for('static', filename='images/convert2.png')}}" alt="Second slide">
             </div>
             <div class="carousel-item img-three">
-              <img class="d-block w-100 " src="{{ url_for('static', filename='images/users.jpg')}}" alt="Third slide">
+              <img class="d-block w-100 " src="{{ url_for('static', filename='images/convert3.png')}}" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -124,19 +131,19 @@
         $(document).ready(function() {
           $('.img-one').magnificPopup({
             items: {
-              src: "{{ url_for('static', filename='images/users.jpg')}}"
+              src: "{{ url_for('static', filename='images/convert1.png')}}"
             },
             type: 'image' // this is default type
         });
         $('.img-two').magnificPopup({
           items: {
-            src: "{{ url_for('static', filename='images/users.jpg')}}"
+            src: "{{ url_for('static', filename='images/convert2.png')}}"
           },
           type: 'image' // this is default type
       });
       $('.img-three').magnificPopup({
         items: {
-          src: "{{ url_for('static', filename='images/users.jpg')}}"
+          src: "{{ url_for('static', filename='images/convert3.png')}}"
         },
         type: 'image' // this is default type
     });
@@ -195,8 +202,6 @@
           formData.append('convert_to', $('#inputGroupSelect01').val());
       } else if ($('#inputGroupSelect02').is(':visible')) {
           formData.append('convert_to', $('#inputGroupSelect02').val());
-      } else {
-          // Handle error here if no conversion format is selected
       }
       
       $.ajax({
@@ -212,26 +217,28 @@
                 $('#successPopup').hide();
               }
               else {
-                $('#successPopup').empty(); 
-                let blob = new Blob([data], { "type": "video\/" + ($('#inputGroupSelect01').val()).toLowerCase() });
-                let click = URL.createObjectURL(blob);
-                let download = 'converted_file.' + ($('#inputGroupSelect01').val()).toLowerCase();
-
-              var videoDiv = $('<div>', {
-                  id: 'download_link',
-                  class: 'download_link',
-                  html: `
-                     <a href=${click} download=${download}>Click here to download!</a>
-                  `
-              });
-              $('#successPopup').append(videoDiv);
-              $('#successPopup').addClass('spaced').show();
-              $('#errorAlert').hide();
-              $('#url-text').hide();
+                if ($('#inputGroupSelect01').is(':visible')){
+                  $('#successPopup').empty();
+               
+                  var videoDiv = $('<div>', {
+                      id: 'download_link',
+                      class: 'download_link',
+                      html: `
+                          <a href="{{ url_for('static', filename='files/')}}${data.title}.${data.format}">Click here to download!</a>
+                      `
+                  });
+                  $('#successPopup').append(videoDiv);
+                  $('#successPopup').addClass('spaced').show();
+                  $('#errorAlert').hide();
+                  $('#url-text').hide();
                 // Handle the converted file response
                 $('#errorAlert').hide();
                 console.log(data);
+            }
+            else{
+              $('#errorAlert').text('The image convertion is still in development').show();
 
+            }
             }
             });
 

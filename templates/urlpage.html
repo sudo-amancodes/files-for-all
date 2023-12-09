@@ -48,18 +48,25 @@
             <h1>
               How Do You Use The Url Downloader?
                     </h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo cum voluptatibus, odit sunt, veniam ea doloremque rem sed maiores iusto rerum non iure beatae consequuntur neque facere assumenda praesentium mollitia! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo cum voluptatibus, odit sunt, veniam ea doloremque rem sed maiores iusto rerum non iure beatae consequuntur neque facere assumenda praesentium mollitia!</p>
+            <br>
+            <p>Step 1) Input your url into search/downloader bar.</p>
+            <p>Step 2) Submit the search/downloader bar and wait a few second.</p>
+            <p>Step 3) After video pops up, click on right 3 dots.</p>
+            <p>Step 4) Click on download!</p>
+            <br>
+            <br>
+            <p><em>See images for help!</em></p>
         </div>
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active img-one">
-                <img class="d-block w-100 " src="{{ url_for('static', filename='images/users.jpg')}}" alt="First slide">
+                <img class="d-block w-100 " src="{{ url_for('static', filename='images/url1.png')}}" alt="First slide">
               </div>
               <div class="carousel-item img-two">
-                <img class="d-block w-100" src="{{ url_for('static', filename='images/users.jpg')}}" alt="Second slide">
+                <img class="d-block w-100" src="{{ url_for('static', filename='images/url2.png')}}" alt="Second slide">
               </div>
               <div class="carousel-item img-three">
-                <img class="d-block w-100 " src="{{ url_for('static', filename='images/users.jpg')}}" alt="Third slide">
+                <img class="d-block w-100 " src="{{ url_for('static', filename='images/url3.png')}}" alt="Third slide">
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -88,19 +95,19 @@
         $(document).ready(function() {
           $('.img-one').magnificPopup({
             items: {
-              src: "{{ url_for('static', filename='images/users.jpg')}}"
+              src: "{{ url_for('static', filename='images/url1.png')}}"
             },
             type: 'image' // this is default type
           });
           $('.img-two').magnificPopup({
             items: {
-              src: "{{ url_for('static', filename='images/users.jpg')}}"
+              src: "{{ url_for('static', filename='images/url2.png')}}"
             },
             type: 'image' // this is default type
         });
         $('.img-three').magnificPopup({
           items: {
-            src: "{{ url_for('static', filename='images/users.jpg')}}"
+            src: "{{ url_for('static', filename='images/url3.png')}}"
           },
           type: 'image' // this is default type
         });

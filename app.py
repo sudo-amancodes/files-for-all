@@ -1,10 +1,11 @@
-from flask import Flask, render_template, url_for, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify
 import yt_dlp
 import subprocess
 from io import BytesIO, StringIO
 from PIL import Image
 from werkzeug.utils import secure_filename
 import ffmpeg
+import os
 
 app = Flask(__name__)
 
@@ -61,22 +62,19 @@ def convert_file(file_stream, convert_to, video_format = False, image_format = F
 
                 print(2)
                 if convert_to.lower() == "avi":
-                    command = ['ffmpeg', '-y', '-i', '-', '-f' , f'{convert_to.lower()}', '-']
-
+                    command = ['ffmpeg', '-i', '-','-y' , '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'static/files/out.avi']
                 elif convert_to.lower() == "mov":
-                    command = ['ffmpeg', '-i', '-', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', '-']
+                    command = ['ffmpeg', '-i', '-','-y', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'static/files/out.mov']
 
                 elif convert_to.lower() == "mp4":
-                    command = ['ffmpeg', '-i', '-', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', '-']
+                    command = ['ffmpeg', '-i', '-', '-y', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'static/files/out.mp4']
 
                 elif convert_to.lower() == "webm":
-                    command = ['ffmpeg', '-i', '-', '-f',  f'{convert_to.lower()}', '-']
+                    command = ['ffmpeg', '-i', '-','-y', '-f',  f'{convert_to.lower()}', 'static/files/out.webm']
 
                 elif convert_to.lower() == "mkv":
-                    command = ['ffmpeg', '-i', '-', '-vf', 'scale=1080:-1', '-acodec', 'copy',  '-threads', '12',  '-f',  'matroska', '-']
+                    command = ['ffmpeg', '-i', '-', '-y', '-vf', 'scale=1080:-1', '-acodec', 'copy',  '-threads', '12',  '-f',  'matroska', 'static/files/out.mkv']
 
-                elif convert_to.lower() == "gif":
-                    command = ['ffmpeg', '-i', '-', '-c' ,'copy', '-movflags', 'frag_keyframe+empty_moov', '-f' , f'{convert_to.lower()}', '-']
 
                 else:
                     raise Exception(f"Error converting image: Not Vaild Format")
@@ -86,33 +84,27 @@ def convert_file(file_stream, convert_to, video_format = False, image_format = F
 
                 new_file, errordata = process.communicate(memfile.read())
 
-                return new_file
+                # return new_file
             except Exception as img_err:
                 raise Exception(f"Error converting image: {str(img_err)}")
 
-        elif image_format == True:
-            # Assume the uploaded file is a video (example using ffmpeg)
-            input_file = BytesIO()
+        # elif image_format == True:
+        #     memfile = BytesIO() 
+        #     memfile.write(file_stream.read())  
+        #     memfile.seek(0) 
 
-            # Convert the video to the desired format using ffmpeg
-            command = [
-                'ffmpeg', '-y',  # Overwrite output files without asking
-                '-i', '-',       # Input from stdin
-                '-c:v', 'copy',  # Copy video codec
-                '-c:a', 'copy',  # Copy audio codec
-                '-f', convert_to.lower(),  # Output format
-                '-movflags', 'faststart',  # Enable quick start for MP4
-                '-'              # Output to stdout
-            ]
+        #     # Convert the video to the desired format using ffmpeg
+        #     command = ['ffmpeg', '-y', '-i', '-', '-f' , f'{convert_to.lower()}', '-']
 
-            # Run the ffmpeg command and capture the output
-            ffmpeg_process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            stdout, stderr = ffmpeg_process.communicate(input=input_file.read())
+        #     # Run the ffmpeg command and capture the output
+        #     process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+            
+        #     new_file, errordata = process.communicate(memfile.read())
 
-            if stderr:
-                raise Exception(f"FFmpeg error: {stderr.decode('utf-8')}")
+        #     if errordata:
+        #         raise Exception(f"FFmpeg error: {errordata.decode('utf-8')}")
 
-            return stdout
+            # return new_file
         else:
             raise ValueError("Invalid conversion format")
     except Exception as e:
@@ -120,6 +112,12 @@ def convert_file(file_stream, convert_to, video_format = False, image_format = F
 
 @app.post("/convert")
 def converter():
+    for filename in os.listdir(path='/Users/aman/Documents/itis3135_work/AmanW-Github.github.io/itis3135/filetransfer_website/static/files'):
+        if filename.startswith('out'):
+            try: 
+                os.remove('/Users/aman/Documents/itis3135_work/AmanW-Github.github.io/itis3135/filetransfer_website/static/files/' + filename)
+            except:
+                pass
     file = request.files.get('file')
     convert_to = request.form.get('convert_to', '')
     
@@ -128,31 +126,30 @@ def converter():
         try:
             # Assuming 'convert_file' function converts to image format for demonstration
             image_formats = ['bmp', 'eps', 'gif', 'pdf', 'im', 'jpg', 'msp', 'pcx', 'png', 'ppm', 'tiff']
-            video_formats = ['mp4', 'mov', 'avi', 'webm', 'mkv', 'gif']
+            video_formats = ['mp4', 'mov', 'avi', 'webm', 'mkv']
 
-            if convert_to.lower() in image_formats:
-                converted_content = convert_file(file.stream, convert_to, False, True)
-                return send_file(
-                    BytesIO(converted_content),
-                    mimetype='image/' + convert_to,  # Update MIME type based on the converted format
-                    as_attachment=True,
-                    download_name=f"converted_file.{convert_to}"
-                )
+            # if convert_to.lower() in image_formats:
+            #     converted_content = convert_file(file.stream, convert_to, False, True)
+            #     return send_file(
+            #         BytesIO(converted_content),
+            #         mimetype='image/' + convert_to,  # Update MIME type based on the converted format
+            #         as_attachment=True,
+            #         download_name=f"converted_file.{convert_to}"
+            #     )
 
-            elif convert_to.lower() in video_formats:
-                converted_content = convert_file(file.stream, convert_to, True, False)
-                return send_file(
-                    BytesIO(converted_content),
-                    mimetype='video/' + convert_to,  # Update MIME type based on the converted format
-                    as_attachment=True,
-                    download_name=f"converted_file.{convert_to}"
-                )
+            if convert_to.lower() in video_formats:
+                convert_file(file.stream, convert_to, True, False)
+                
+                return jsonify({
+                'title': 'out',
+                'format': f'{convert_to.lower()}'
+            })
             # Sending the converted file back to the front end
         except Exception as e:
             return jsonify({'error': f"There was an error with the conversion: {str(e)}"})
 
     return jsonify({'error': "Invalid request data"})
-    
+
 
 
 @app.get("/urlpage")
