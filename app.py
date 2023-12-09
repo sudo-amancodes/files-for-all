@@ -76,16 +76,16 @@ def convert_file(file_stream, convert_to, video_format = False, image_format = F
 
 
                 else:
-                    raise Exception(f"Error converting image: Not Vaild Format")
+                    raise Exception(f"Error converting video: Not Vaild Format")
 
 
                 process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 
                 new_file, errordata = process.communicate(memfile.read())
 
-                # return new_file
+                return new_file
             except Exception as img_err:
-                raise Exception(f"Error converting image: {str(img_err)}")
+                raise Exception(f"Error converting video: {str(img_err)}")
 
         # elif image_format == True:
         #     memfile = BytesIO() 
@@ -111,12 +111,6 @@ def convert_file(file_stream, convert_to, video_format = False, image_format = F
 
 @app.post("/convert")
 def converter():
-    for filename in os.listdir(path='/Users/aman/Documents/itis3135_work/AmanW-Github.github.io/itis3135/filetransfer_website/static/files'):
-        if filename.startswith('out'):
-            try: 
-                os.remove('/Users/aman/Documents/itis3135_work/AmanW-Github.github.io/itis3135/filetransfer_website/static/files/' + filename)
-            except:
-                pass
     file = request.files.get('file')
     convert_to = request.form.get('convert_to', '')
     
