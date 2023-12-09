@@ -224,7 +224,8 @@
                       id: 'download_link',
                       class: 'download_link',
                       html: `
-                          <a href="{{ url_for('static', filename='files/')}}${data.title}.${data.format}">Click here to download!</a>
+                     <a href="static/files/out.${data.format}" type="video/mp4" download>Click here to download!</a>
+
                       `
                   });
                   $('#successPopup').append(videoDiv);
