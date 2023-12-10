@@ -38,11 +38,11 @@
   </head>
   <body>
     <div class="hero-section">
-      <video autoplay loop muted plays-inline class="back-video">
+      <video autoplay loop muted class="back-video">
         <source src="{{ url_for('static', filename='images/video-2.mp4')}}" type="video/mp4" />
       </video>
       <nav>
-        <a href="/"><img src="{{ url_for('static', filename='images/logo2.png')}}" class="logo" /></a>
+        <a href="/"><img src="{{ url_for('static', filename='images/logo2.png')}}" class="logo" alt="logo" /></a>
         <ul>
           <li><a href="/urlpage">Url Downloader</a></li>
           <li><a href="/fileconverter">File Converter</a></li>
@@ -55,8 +55,11 @@
         <a href="https://github.com/AmanW-GitHub">Current Portfolio</a>
       </div>
     </div>
-    <!-- https://niemvuilaptrinh.medium.com/27-html-timeline-for-web-design-979b8e5d1c05
-    Used a medium template for timeline! -->
+    <!-- 
+    https://niemvuilaptrinh.medium.com/27-html-timeline-for-web-design-979b8e5d1c05
+    Used a medium website template for timeline! 
+    This includes css/sass from the website and the following div element!
+    -->
     <div class="container">
       <h1>Timeline of Files For All!</h1>
       <h4>"The journey of a thousand miles begins with one step." - Lao Tzu</h4>
@@ -121,44 +124,21 @@
         <div class="text-lighten">
           <h1>Who am I?</h1>
           <p>I am the founder and coordinator at Files For All!</p>
-          <img class="oriimage" src="{{ url_for('static', filename='images/IMG_6866.jpeg')}}" />
+          <img class="oriimage" src="{{ url_for('static', filename='images/IMG_6866.jpeg')}}" alt="oriimage"/>
         </div>
       </div>
     </section>
     <footer class="py-3 my-4">
       <ul class="nav justify-content-center border-bottom pb-3 mb-3">
         <li class="nav-item p-2">
-          <a href="https://validator.w3.org/check?uri=referer"
-            ><button class="btn btn-dark">html validation</button></a
-          >
+          <button class="btn btn-dark"><a href="https://validator.w3.org/check?uri=referer">html validation</a></button>
         </li>
         <li class="nav-item p-2">
-          <a href="https://jigsaw.w3.org/css-validator/check/referer"
-            ><button class="btn btn-dark">css validation</button></a
-          >
+          <button class="btn btn-dark"><a href="https://jigsaw.w3.org/css-validator/check/referer">css validation</a></button>
         </li>
       </ul>
       <p class="text-center text-muted">© 2023 Waghchoure Designs</p>
     </footer>
-
-    <script>
-      $(document).ready(function () {
-        var $folded = $(".aboutmepage").oriDomi({ maxAngle: 40, vPanels: 3 });
-        
-        // Function to handle scroll event
-        function handleScroll() {
-          if ($(this).scrollTop() > 250) {
-            // Apply accordion effect when scrolled more than 100px
-            $folded.oriDomi("accordion", 0);
-          } else {
-            // Reset to default state if scrolled back to the top
-            $folded.oriDomi("accordion", 50);
-          }
-        }
-
-        // Bind scroll event
-        $(document).scroll(handleScroll);
-      });
-    </script>
+    <script src="{{ url_for('static', filename='scripts/aboutus.js')}}"></script>
   </body>
 </html>

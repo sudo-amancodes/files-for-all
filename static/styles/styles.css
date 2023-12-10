@@ -79,7 +79,7 @@ nav ul li a:hover{
     margin: auto;
     border-radius: 60px;
     padding: 10px 20px;
-    backdrop-filter: blur(4px) saturate();
+    backdrop-filter: blur(4px);
 }
 .whypage{
     margin:auto;
@@ -103,13 +103,12 @@ text-align:left;
     background:transparent;
     flex: 1;
     outline: none;
-    padding-right:24px 20px;
-    color: #cac7ff;
+    color: #fff;
     font-size: 20px;
     border: 0;
 }
 ::placeholder{
-    color: #cac7ff;
+    color: #fff;
 }
 .search-bar button img{
     width: 25px;
@@ -284,4 +283,7 @@ justify-content: center;
     height: auto;
  }
 
+ footer a{
+    color:#fff;
+}
  

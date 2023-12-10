@@ -20,11 +20,11 @@
 </head>
 <body>
   <div class="hero-section">
-    <video autoplay loop muted plays-inline class="back-video">
+    <video autoplay loop muted class="back-video">
         <source src="{{ url_for('static', filename='images/filebackground.mp4')}}" type="video/mp4">
     </video>
     <nav>
-      <a href="/"><img src="{{ url_for('static', filename='images/logo2.png')}}" class="logo" /></a>
+      <a href="/"><img src="{{ url_for('static', filename='images/logo2.png')}}" class="logo" alt="logo"/></a>
       <ul>
         <li><a href="/urlpage">Url Downloader</a></li>
         <li><a href="/fileconverter">File Converter</a></li>
@@ -50,7 +50,7 @@
                 <option value="MKV">MKV</option>
                 <option value="WebM">WebM</option>
               </select>
-              
+              <!-- Future possible convertion of images -->
               <select class="image-select" id="inputGroupSelect02" name="format2">
                 <option value="BMP" selected>BMP</option>
                 <option value="EPS">EPS</option>
@@ -110,141 +110,44 @@
           
     </section>
     <footer class="py-3 my-4">
-        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-          <li class="nav-item p-2"><a href="https://validator.w3.org/check?uri=referer"><button class="btn btn-dark">html validation</button></a> </li>
-          <li class="nav-item p-2">        
-          <a href="https://jigsaw.w3.org/css-validator/check/referer"><button class="btn btn-dark">css validation</button></a>
-          </li>
-        </ul>
-        <p class="text-center text-muted">© 2023 Waghchoure Designs</p>
-      </footer>
+      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item p-2">
+          <button class="btn btn-dark"><a href="https://validator.w3.org/check?uri=referer">html validation</a></button>
+        </li>
+        <li class="nav-item p-2">
+          <button class="btn btn-dark"><a href="https://jigsaw.w3.org/css-validator/check/referer">css validation</a></button>
+        </li>
+      </ul>
+      <p class="text-center text-muted">© 2023 Waghchoure Designs</p>
+    </footer>
       <script src="{{ url_for('static', filename='scripts/jquery.magnific-popup.js')}}"></script>
+      <script src="{{ url_for('static', filename='scripts/fileconverter.js')}}"></script>
       <script>
-        $('#inputGroupSelect01').hide()
-        $('#inputGroupSelect02').hide()
-        $('#finish').hide()
-        $('#errorAlert').hide()
-        $("#next1").show();
-        let g1 = false;
-        let g2 = false;
+
+        //This is for the image zoom. I added it to this file because of backend convention of flask -> jinja -> url_for. 
+        // All js and css for this page are in the styles and scripts folder.
 
         $(document).ready(function() {
-          $('.img-one').magnificPopup({
-            items: {
-              src: "{{ url_for('static', filename='images/convert1.png')}}"
-            },
-            type: 'image' // this is default type
-        });
-        $('.img-two').magnificPopup({
+
+        $('.img-one').magnificPopup({
           items: {
             src: "{{ url_for('static', filename='images/convert2.png')}}"
           },
           type: 'image' // this is default type
       });
-      $('.img-three').magnificPopup({
+      $('.img-two').magnificPopup({
         items: {
-          src: "{{ url_for('static', filename='images/convert3.png')}}"
+          src: "{{ url_for('static', filename='images/convert2.png')}}"
         },
         type: 'image' // this is default type
     });
-    function isValueInDropdown(value, mySelect) {
-      for (var i = 0; i < mySelect.options.length; i++) {
-        if (mySelect.options[i].value === value) {
-          return true; // Value found in the dropdown
-        }
-      }
-      return false; // Value not found in the dropdown
-    }
-    $("#formFile").click(function(){
-      $('#inputGroupSelect01').hide()
-      $('#inputGroupSelect02').hide()
-      $('#finish').hide()
-      $('#errorAlert').hide()
-      $("#next1").show();
-    });
-
-    $("#next1").click(function(){
-      // Get the file input element 
-      
-      var fileVal=document.getElementById("formFile");
-      var file = fileVal.value.split('.');
-      file = file[file.length-1].toUpperCase();
-      console.log(file)
-      if (isValueInDropdown(file, inputGroupSelect01)){
-        $('#errorAlert').hide();
-        $('#inputGroupSelect01').show();
-        $("#next1").hide();
-        $('#finish').show();
-        g1 = true;
-      }
-      else if (isValueInDropdown(file, inputGroupSelect02)){
-        $('#errorAlert').hide();
-        $('#inputGroupSelect02').show();
-        $("#next1").hide();
-        $('#finish').show();
-        g2 = true;
-        }
-        else {
-          $('#errorAlert').text("Error").show();
-        }
-    });
-
-    $('#file-form').on('submit', function(event){
-      event.preventDefault();
-      $('#successPopup').hide();
-
-
-      let fileInput = $('#formFile')[0].files[0];
-      let formData = new FormData();
-      formData.append('file', fileInput);
-      
-      if ($('#inputGroupSelect01').is(':visible')) {
-          formData.append('convert_to', $('#inputGroupSelect01').val());
-      } else if ($('#inputGroupSelect02').is(':visible')) {
-          formData.append('convert_to', $('#inputGroupSelect02').val());
-      }
-      
-      $.ajax({
-          data: formData,
-          type: "POST",
-          url: "/convert",
-          contentType: false,
-          processData: false,
-      })
-        .done(function(data){
-              if (data.error){
-                $('#errorAlert').text(data.error).show();
-                $('#successPopup').hide();
-              }
-              else {
-                if ($('#inputGroupSelect01').is(':visible')){
-                  $('#successPopup').empty();
-               
-                  var videoDiv = $('<div>', {
-                      id: 'download_link',
-                      class: 'download_link',
-                      html: `
-                      <a href="{{ url_for('static', filename='files/out.mp4')}}" download>Click here to download!</a>                      `
-                  });
-                  $('#successPopup').append(videoDiv);
-                  $('#successPopup').addClass('spaced').show();
-                  $('#errorAlert').hide();
-                  $('#url-text').hide();
-                // Handle the converted file response
-                $('#errorAlert').hide();
-                console.log(data);
-            }
-            else{
-              $('#errorAlert').text('The image convertion is still in development').show();
-
-            }
-            }
-            });
-
-    });
-
+    $('.img-three').magnificPopup({
+      items: {
+        src: "{{ url_for('static', filename='images/convert3.png')}}"
+      },
+      type: 'image' // this is default type
   });
-
+});
       </script>
     </body>
     </html>
