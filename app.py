@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, send_file, send_from_directory
+from flask import Flask, render_template, request, jsonify
 import yt_dlp
 import subprocess
 from io import BytesIO, StringIO
@@ -61,18 +61,18 @@ def convert_file(file_stream, convert_to, video_format = False, image_format = F
 
                 print(2)
                 if convert_to.lower() == "avi":
-                    command = ['ffmpeg', '-i', '-','-y' , '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'out.avi']
+                    command = ['ffmpeg', '-i', '-','-y' , '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'static/files/out.avi']
                 elif convert_to.lower() == "mov":
-                    command = ['ffmpeg', '-i', '-','-y', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'out.mov']
+                    command = ['ffmpeg', '-i', '-','-y', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'static/files/out.mov']
 
                 elif convert_to.lower() == "mp4":
-                    command = ['ffmpeg', '-i', '-', '-y', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'out.mp4']
+                    command = ['ffmpeg', '-i', '-', '-y', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'static/files/out.mp4']
 
                 elif convert_to.lower() == "webm":
-                    command = ['ffmpeg', '-i', '-','-y', '-f',  f'{convert_to.lower()}', 'out.webm']
+                    command = ['ffmpeg', '-i', '-','-y', '-f',  f'{convert_to.lower()}', 'static/files/out.webm']
 
                 elif convert_to.lower() == "mkv":
-                    command = ['ffmpeg', '-i', '-', '-y', '-vf', 'scale=1080:-1', '-acodec', 'copy',  '-threads', '12',  '-f',  'matroska', 'out.mkv']
+                    command = ['ffmpeg', '-i', '-', '-y', '-vf', 'scale=1080:-1', '-acodec', 'copy',  '-threads', '12',  '-f',  'matroska', 'static/files/out.mkv']
 
 
                 else:
@@ -132,8 +132,7 @@ def converter():
 
             if convert_to.lower() in video_formats:
                 convert_file(file.stream, convert_to, True, False)
-                global file_type 
-                file_type = convert_to.lower()
+                
                 return jsonify({
                 'title': 'out',
                 'format': f'{convert_to.lower()}'
@@ -144,10 +143,7 @@ def converter():
 
     return jsonify({'error': "Invalid request data"})
 
-@app.get('/download')
-def download_file():
-    path = 'out.'+file_type
-    return send_file(path, as_attachment=True)
+
 
 @app.get("/urlpage")
 def urlpage():
