@@ -61,18 +61,18 @@ def convert_file(file_stream, convert_to, video_format = False, image_format = F
 
                 print(2)
                 if convert_to.lower() == "avi":
-                    command = ['ffmpeg', '-i', '-','-y' , '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'static/files/out.avi']
+                    command = ['ffmpeg', '-i', '-','-y' , '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'out.avi']
                 elif convert_to.lower() == "mov":
-                    command = ['ffmpeg', '-i', '-','-y', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'static/files/out.mov']
+                    command = ['ffmpeg', '-i', '-','-y', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'out.mov']
 
                 elif convert_to.lower() == "mp4":
-                    command = ['ffmpeg', '-i', '-', '-y', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'static/files/out.mp4']
+                    command = ['ffmpeg', '-i', '-', '-y', '-g', '52', '-c:a', 'aac', '-b:a', '64k', '-c:v', 'libx264', '-b:v', '448k', '-f',  f'{convert_to.lower()}', '-movflags', 'frag_keyframe+empty_moov', 'out.mp4']
 
                 elif convert_to.lower() == "webm":
-                    command = ['ffmpeg', '-i', '-','-y', '-f',  f'{convert_to.lower()}', 'static/files/out.webm']
+                    command = ['ffmpeg', '-i', '-','-y', '-f',  f'{convert_to.lower()}', 'out.webm']
 
                 elif convert_to.lower() == "mkv":
-                    command = ['ffmpeg', '-i', '-', '-y', '-vf', 'scale=1080:-1', '-acodec', 'copy',  '-threads', '12',  '-f',  'matroska', 'static/files/out.mkv']
+                    command = ['ffmpeg', '-i', '-', '-y', '-vf', 'scale=1080:-1', '-acodec', 'copy',  '-threads', '12',  '-f',  'matroska', 'out.mkv']
 
 
                 else:
@@ -146,7 +146,7 @@ def converter():
 
 @app.get('/download')
 def download_file():
-    path = 'static/files/out.'+file_type
+    path = 'out.'+file_type
     return send_file(path, as_attachment=True)
 
 @app.get("/urlpage")
