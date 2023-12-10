@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file, send_from_directory
 import yt_dlp
 import subprocess
 from io import BytesIO, StringIO
@@ -132,7 +132,8 @@ def converter():
 
             if convert_to.lower() in video_formats:
                 convert_file(file.stream, convert_to, True, False)
-                
+                global file_type 
+                file_type = convert_to.lower()
                 return jsonify({
                 'title': 'out',
                 'format': f'{convert_to.lower()}'
@@ -143,7 +144,10 @@ def converter():
 
     return jsonify({'error': "Invalid request data"})
 
-
+@app.get('/download')
+def download_file():
+    path = 'static/files/out.'+file_type
+    return send_file(path, as_attachment=True)
 
 @app.get("/urlpage")
 def urlpage():
