@@ -139,7 +139,11 @@ text-align:left;
     
 
 }
-.howpage h1{
+.howpage h2{
+    font-weight: 600;
+    font-size: 52px;
+}
+.testimonials h2{
     font-weight: 600;
     font-size: 52px;
 }
@@ -287,3 +291,6 @@ justify-content: center;
     color:#fff;
 }
  
+.whypage h2{
+    padding-bottom: 20px;
+}
