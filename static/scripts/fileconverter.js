@@ -7,6 +7,14 @@ let g1 = false;
 let g2 = false;
 
 $(document).ready(function() {
+
+    document.getElementById("html-validator").onclick = function () {
+        location.href = "https://validator.w3.org/check?uri=referer";
+    };
+    document.getElementById("css-validator").onclick = function () {
+        location.href = "https://validator.w3.org/check?uri=referer";
+    };
+    
 function isValueInDropdown(value, mySelect) {
     for (var i = 0; i < mySelect.options.length; i++) {
     if (mySelect.options[i].value === value) {
